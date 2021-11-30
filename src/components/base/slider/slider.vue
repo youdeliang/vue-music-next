@@ -1,7 +1,14 @@
 <template>
-  <div class="slider" ref="rootRef">
+  <div
+    class="slider"
+    ref="rootRef"
+  >
     <div class="slider-group">
-      <div class="slider-page" v-for="item in sliders" :key="item.id">
+      <div
+        class="slider-page"
+        v-for="item in sliders"
+        :key="item.id"
+      >
         <a :href="item.link">
           <img :src="item.pic" />
         </a>
@@ -20,20 +27,23 @@
 
 <script>
 import { ref } from 'vue'
+import useSlider from './use-slider'
 export default {
   name: 'slider',
   props: {
     sliders: {
       type: Array,
-      default() {
+      default () {
         return []
       },
     },
   },
-  setup() {
+  setup () {
     const rootRef = ref(null)
+    const { currentPageIndex } = useSlider(rootRef)
     return {
       rootRef,
+      currentPageIndex
     }
   },
 }
@@ -42,8 +52,8 @@ export default {
 <style lang="scss" scoped>
 .slider {
   min-height: 1px;
-  font-size: 0;
-  touch-action: pan-y;
+  font-size: 0; //?
+  touch-action: pan-y; //?
   .slider-group {
     position: relative;
     overflow: hidden;
