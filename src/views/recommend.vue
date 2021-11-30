@@ -1,55 +1,52 @@
 <template>
   <div class="recommend">
-    <div class="slider-wrapper">
-      <slider
-        v-if="sliders.length"
-        :sliders="sliders"
-      ></slider>
-    </div>
-    <div class="recommed-list">
-      <h1 class="list-title">热门歌单推荐</h1>
-      <ul>
-        <li
-          class="item"
-          v-for="item in albums"
-          :key="item.id"
-        >
-          <div class="icon">
-            <img
-              :src="item.pic"
-              width="60"
-              height="60"
-            >
+    <scroll class="recommend-content">
+      <div>
+        <div class="slider-wrapper">
+          <div class="slider-content">
+            <slider v-if="sliders.length" :sliders="sliders"></slider>
           </div>
-          <div class="text">
-            <h2 class="name">{{item.username}}</h2>
-            <p class="title">{{item.title}}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+          <ul>
+            <li class="item" v-for="item in albums" :key="item.id">
+              <div class="icon">
+                <img :src="item.pic" width="60" height="60" />
+              </div>
+              <div class="text">
+                <h2 class="name">{{ item.username }}</h2>
+                <p class="title">{{ item.title }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </scroll>
   </div>
 </template>
 
 <script>
 import { getRecommend } from '@/service/recommend'
 import Slider from '@/components/base/slider/slider'
+import Scroll from '@/components/base/scroll/scroll'
 export default {
   name: 'recommend',
   components: {
-    Slider
+    Slider,
+    Scroll,
   },
-  data () {
+  data() {
     return {
       sliders: [],
-      albums: []
+      albums: [],
     }
   },
-  async created () {
+  async created() {
     const result = await getRecommend()
     this.sliders = result.sliders
     this.albums = result.albums
-  }
+  },
 }
 </script>
 

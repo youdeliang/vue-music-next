@@ -1,6 +1,6 @@
 import BScroll from "@better-scroll/core";
 import Slide from "@better-scroll/slide";
-import { onMounted, onUnmounted, ref } from "@vue/runtime-core";
+import { onMounted, onUnmounted, ref } from "vue";
 
 BScroll.use(Slide)
 export default function useSlider (wrapperRef) {
